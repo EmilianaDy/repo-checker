@@ -1,0 +1,23 @@
+
+  github works!
+  {{ user?.name}}
+  {{ user?.public_repos }}
+
+  <app-user-search (talk)="onClick($event)"></app-user-search>
+  <ul *ngIf="allRepos">
+    <li *ngFor="let repo of allRepos" (click)="showRepoInfo($event, repo)" [ngClass]="{'active': selectedRepo === repo.name}">{{ repo.name }}
+      <div class="toggle">
+        <p>description {{ repo.description}}</p>
+        <p>created at {{ repo.created_at | date : short}}</p>
+        <p>git url {{ repo.git_url}}</p>
+        <p>forks {{ repo.forks}}</p>     
+        <p>stars {{ repo.stargazers_count}}</p>  
+        <p>language {{ repo.language}}</p>
+        <p>open issues {{ repo.open_issues}}</p>
+        <p>last update {{ repo.updated_at}}</p>
+        <p *ngIf="repo.lastCommit">last commit {{ repo.lastCommit.commit.message}}</p>
+      </div>
+    </li>
+    
+  </ul>
+

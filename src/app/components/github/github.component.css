@@ -1,0 +1,7 @@
+.toggle {
+    display: none;
+}
+
+.active .toggle {
+    display: block;
+}
