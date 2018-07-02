@@ -1,21 +1,55 @@
 <div class="repos-wrapper">
   <div class="repos-wrapper-inner">
     <app-user-search (talk)="onClick($event)"></app-user-search>
-    <p class="repos-owner">Repos owned by {{ user?.name}}</p>
-    <p class="repos-count">Total repos count {{ user?.public_repos }}</p>
+    <p class="repos-owner">Repos owned by <span>{{ user?.name}}</span></p>
+    <p class="repos-count">Total repos count <span>{{ user?.public_repos }}</span></p>
 
     <ul class="repos-list" *ngIf="allRepos">
-      <li class="repos-item" *ngFor="let repo of allRepos" (click)="showRepoInfo($event, repo)" [ngClass]="{'active': selectedRepo === repo.name}">{{ repo.name }}
+      <li class="repos-item" *ngFor="let repo of allRepos" (click)="showRepoInfo($event, repo)" [ngClass]="{'active': selectedRepo === repo.name}"><span>{{ repo.name }}</span>
         <div class="toggle repo-details">
-          <p>description {{ repo.description}}</p>
-          <p>created at {{ repo.created_at | date : short}}</p>
-          <p>git url {{ repo.git_url}}</p>
-          <p>forks {{ repo.forks}}</p>     
-          <p>stars {{ repo.stargazers_count}}</p>  
-          <p>language {{ repo.language}}</p>
-          <p>open issues {{ repo.open_issues}}</p>
-          <p>last update {{ repo.updated_at}}</p>
-          <p *ngIf="repo.lastCommit">last commit {{ repo.lastCommit.commit.message}}</p>
+          <div class="repo-details-left">
+            <h2>Details</h2>
+            <div class="detail">
+              <div class="detail-name">Description</div>
+              <div class="detail-value">{{ repo.description }}</div>
+            </div>
+            <div class="detail">
+                <div class="detail-name">Language</div>
+                <div class="detail-value">{{ repo.language }}</div>
+            </div>
+            <div class="detail">
+                <div class="detail-name">Created at</div>
+                <div class="detail-value">{{ repo.created_at | date : short }}</div>
+            </div>
+            <div class="detail">
+                <div class="detail-name">Forks</div>
+                <div class="detail-value">{{ repo.forks }}</div>
+            </div>
+            <div class="detail">
+                <div class="detail-name">Stars</div>
+                <div class="detail-value">{{ repo.stargazers_count }}</div>
+            </div>
+            <div class="detail">
+                <div class="detail-name">Open issues</div>
+                <div class="detail-value">{{ repo.open_issues }}</div>
+            </div>
+          </div>
+          <div class="repo-details-right" *ngIf="repo.lastCommit">
+            <h2>Last commit</h2>
+            <div class="detail">
+                <div class="detail-name">Date </div>
+                <div class="detail-value">{{ repo.lastCommit.commit.author.date | date : short }}</div>
+            </div>
+            <div class="detail">
+                <div class="detail-name">Message </div>
+                <div class="detail-value">{{ repo.lastCommit.commit.message }}</div>
+            </div>
+            <div class="detail">
+                <div class="detail-name">Author </div>
+                <div class="detail-value">{{ repo.lastCommit.commit.author.name }}</div>
+            </div>
+            <a class="main-button repo-link" href="{{ repo.html_url }}" target="_blank">Go to GitHub page</a>
+          </div>
         </div>
       </li>   
     </ul>
