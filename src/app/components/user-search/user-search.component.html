@@ -3,7 +3,7 @@
         <p class="search-text">Search GitHub repos by owner's name</p>
         <div class="search-input-wrapper">
             <div class="search-input-wrapper-inner">
-                <input placeholder="e. g. facebook" class="search-input" [ngClass]="{'empty-input' : showError }" #userSearchInput>
+                <input placeholder="e. g. facebook" class="search-input" [ngClass]="{'empty-input' : showError }" (keyup)="onKeyUp(userSearchInput.value, $event)" #userSearchInput>
                 <div class="hidden" [ngClass]="showError ? 'active-error' : 'hidden'">Please fill out this field</div>
             </div>
             <div class="main-button search-button" (click)="onClick(userSearchInput.value)">Search by user</div>

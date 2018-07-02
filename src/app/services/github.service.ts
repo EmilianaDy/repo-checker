@@ -5,29 +5,22 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class GithubService {
-  private clientId = '9df07b24e6fd74b8fecf';
-  private clientSecret = '9ebf54f71e8140df68f9d8bb561babcebbc06d48';
-  // public username = 'EmilianaDy';
+
+  gitHubUrl = 'https://api.github.com';
 
   constructor(private http: HttpClient) {
 
    }
 
    getUser(username: string) {
-    return this.http.get('https://api.github.com/users/' + username);
+    return this.http.get(this.gitHubUrl + '/users/' + username);
    }
 
-  //  updateService(newUser) {
-  //   this.username = newUser;
-  //   return this.http.get('https://api.github.com/users/' + this.username);
-  //  }
-
    getRepos(username: string) {
-    return this.http.get('https://api.github.com/users/' + username + '/repos');
+    return this.http.get(this.gitHubUrl + '/users/' + username + '/repos');
    }
 
    getLastCommits(username: string, repoName: string) {
-    return this.http.get('https://api.github.com/repos/' + username + '/' + repoName + '/commits');
+    return this.http.get(this.gitHubUrl + '/repos/' + username + '/' + repoName + '/commits');
    }
-
 }

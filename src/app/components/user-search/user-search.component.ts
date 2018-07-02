@@ -19,9 +19,15 @@ export class UserSearchComponent {
   onClick(usernameInputValue: string) {
     if (!usernameInputValue) {
       this.showError = true;
-      return;
+    } else {
+      this.showError = false;
+      this.searchClicked.emit(usernameInputValue);
     }
-    this.showError = false;
-    this.searchClicked.emit(usernameInputValue);
+  }
+
+  onKeyUp(usernameInputValue: string, event: any) {
+    if (event.code === 'Enter') {
+      this.onClick(usernameInputValue);
+    }
   }
 }
