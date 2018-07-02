@@ -8,7 +8,7 @@ import { CommitModel } from '../../models/CommitModel';
 @Component({
   selector: 'app-github',
   templateUrl: './github.component.html',
-  styleUrls: ['./github.component.css'],
+  styleUrls: ['./github.component.scss'],
   providers: [GithubService]
 })
 export class GithubComponent implements AfterViewInit {

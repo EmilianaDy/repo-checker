@@ -1,0 +1,52 @@
+@import '../../../styles.scss';
+
+.search-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .search-left {
+        display: flex;
+        flex-direction: column;
+
+        .search-text {
+            margin-top: 0;
+        }
+
+        .search-input-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-input {
+            border: 2px solid $primary-color;
+            border-radius: 5px;
+            padding: 8px;
+        }
+
+        .search-button {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background-color: $primary-color;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 0 30px; 
+            transition: all .5s ease;
+            border-radius: 5px;
+            
+            &:hover {
+                background-color: $accent-color;
+                cursor: pointer;
+                
+            }
+        }
+    }
+
+    .search-right {
+        .octocat-image {
+            max-width: 200px;
+            display: block;
+        }
+    }   
+}

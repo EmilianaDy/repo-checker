@@ -1,0 +1,37 @@
+@import '../../../styles.scss';
+
+.repos-wrapper {
+    display: flex;
+    justify-content: center;
+
+    .repos-wrapper-inner {
+        width: 1000px;
+        max-width: 100%;
+        margin-top: 30px;
+
+        .repos-list {
+            padding: 0;
+            width: 100%;
+
+            .repos-item {
+                display: inline-block;
+                list-style-type:  none;
+                padding: 10px;
+                border: 1px solid $primary-color;
+                border-radius: 5px;
+                width: 100%;
+                margin: 10px 0;
+                background-color: #fff;
+
+            }
+        }
+    }
+}
+
+.toggle {
+    display: none;
+}
+
+.active .toggle {
+    display: block;
+}

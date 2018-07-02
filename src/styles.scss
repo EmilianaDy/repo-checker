@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'app/utils/normalize.scss';
+
+// Color variables
+
+$primary-color: #49A8ED;
+$accent-color: #2374AB;
+
+// Fonts
+
+@font-face {
+	font-family: "Open Sans";
+	src: url("/app/fonts/OpenSans-Regular.ttf") format("truetype");
+}
