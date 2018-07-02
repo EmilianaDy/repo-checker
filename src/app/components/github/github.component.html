@@ -1,6 +1,9 @@
 <div class="repos-wrapper">
   <div class="repos-wrapper-inner">
-    <app-user-search (talk)="onClick($event)"></app-user-search>
+    
+    <app-user-search (searchClicked)="onSearchClicked($event)"></app-user-search>
+    <p>{{ errorMessage }}</p>
+    <div *ngIf="!errorMessage">
     <p class="repos-owner">Repos owned by <span>{{ user?.name}}</span></p>
     <p class="repos-count">Total repos count <span>{{ user?.public_repos }}</span></p>
 
@@ -38,20 +41,21 @@
             <h2>Last commit</h2>
             <div class="detail">
                 <div class="detail-name">Date </div>
-                <div class="detail-value">{{ repo.lastCommit.commit.author.date | date : short }}</div>
+                <div class="detail-value">{{ repo.lastCommit.author.date | date : short }}</div>
             </div>
             <div class="detail">
                 <div class="detail-name">Message </div>
-                <div class="detail-value">{{ repo.lastCommit.commit.message }}</div>
+                <div class="detail-value">{{ repo.lastCommit.message }}</div>
             </div>
             <div class="detail">
                 <div class="detail-name">Author </div>
-                <div class="detail-value">{{ repo.lastCommit.commit.author.name }}</div>
+                <div class="detail-value">{{ repo.lastCommit.author.name }}</div>
             </div>
-            <a class="main-button repo-link" href="{{ repo.html_url }}" target="_blank">Go to GitHub page</a>
+            <a class="main-button repo-link" href="{{ repo.html_url }}" target="_blank" (click)="$event.stopPropagation()">Go to GitHub page</a>
           </div>
         </div>
       </li>   
     </ul>
+  </div>
   </div>
 </div>

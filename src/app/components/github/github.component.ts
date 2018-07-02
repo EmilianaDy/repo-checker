@@ -17,50 +17,45 @@ export class GithubComponent implements AfterViewInit {
   selectedRepo: string;
 
   user: User;
-  newUser: User;
   showInfo: boolean;
-
-  @ViewChild(UserSearchComponent) child;
+  errorMessage: string;
 
   constructor(private githubService: GithubService) {
-
     this.showInfo = false;
-
-    this
-      .githubService
-      .getUser()
-      .subscribe((data: User) => {
-        this.user = data;
-    });
-
-    this.showAllUserRepos();
-
   }
 
   ngAfterViewInit() {
-    this.user = this.child.usernameInputValue;
-  }
-
-  onClick() {
-    this.newUser = this.child.user;
-
     this
       .githubService
-      .updateService(this.newUser)
+      .getUser('EmilianaDy')
       .subscribe((data: User) => {
         this.user = data;
-    });
+        this.showAllUserRepos();
+      },
+      error => this.handleError(error));
+  }
 
-    this.showAllUserRepos();
+
+  onSearchClicked(username: string) {
+    this
+      .githubService
+      .getUser(username)
+      .subscribe((data: User) => {
+        this.user = data;
+        this.errorMessage = null;
+        this.showAllUserRepos();
+      },
+      error => this.handleError(error));
   }
 
   showAllUserRepos() {
     this
       .githubService
-      .getRepos()
+      .getRepos(this.user.login)
       .subscribe((data: RepoModel[]) => {
         this.allRepos = data;
-    });
+    },
+    error => this.handleError(error));
   }
 
   showRepoInfo(event, repo: RepoModel) {
@@ -71,11 +66,19 @@ export class GithubComponent implements AfterViewInit {
 
       this
       .githubService
-      .getLastCommits(repo.name)
-      .subscribe((data: CommitModel[]) => {
-        repo.lastCommit = data[0];
-    });
+      .getLastCommits(this.user.login, repo.name)
+      .subscribe((data) => {
+        repo.lastCommit = data[0].commit;
+      },
+      error => this.handleError(error));
     }
   }
 
+  handleError(error: any) {
+    if (error && error.statusText) {
+      this.errorMessage = error.statusText;
+    } else {
+      this.errorMessage = 'Unknown error';
+    }
+  }
 }

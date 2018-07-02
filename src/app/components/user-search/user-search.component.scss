@@ -13,6 +13,11 @@
     .search-left {
         display: flex;
         flex-direction: column;
+        margin-right: 30px;
+
+        @include below('tablet') {
+            margin-right: 0;
+        }
 
         .search-text {
             margin-top: 0;
@@ -25,10 +30,11 @@
         .search-input-wrapper {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
 
             @include below('tablet') {
                 justify-content: center;
+                align-items: center;
                 flex-direction: column;
             }
         }
@@ -39,8 +45,27 @@
             padding: 8px;
             margin-right: 30px;
 
+            &.empty-input {
+                border: 2px solid red;
+            }
+
             @include below('tablet') {
                 margin-right: 0;
+            }
+        }
+
+        .hidden {
+            opacity: 0;
+            margin-top: 10px;
+        }
+
+        .active-error {
+            opacity: 1;
+            color: red;
+            transition: all .5s ease-in-out;
+
+            @include below('tablet') {
+                text-align: center;
                 margin-bottom: 20px;
             }
         }

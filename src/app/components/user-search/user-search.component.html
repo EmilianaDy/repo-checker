@@ -2,9 +2,13 @@
     <div class="search-left">
         <p class="search-text">Search GitHub repos by owner's name</p>
         <div class="search-input-wrapper">
-            <input placeholder="e. g. facebook" class="search-input" #userSearchInput>
+            <div class="search-input-wrapper-inner">
+                <input placeholder="e. g. facebook" class="search-input" [ngClass]="{'empty-input' : showError }" #userSearchInput>
+                <div class="hidden" [ngClass]="showError ? 'active-error' : 'hidden'">Please fill out this field</div>
+            </div>
             <div class="main-button search-button" (click)="onClick(userSearchInput.value)">Search by user</div>
         </div>
+        
     </div>
     <div class="search-right">
         <img class="octocat-image" src="../../../assets/images/Octocat.png" alt="octocat-image">

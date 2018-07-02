@@ -8,15 +8,20 @@ import { GithubService} from '../../services/github.service';
 })
 export class UserSearchComponent {
 
-  user: string;
+  showError: boolean;
 
-  @Output() talk: EventEmitter<string> = new EventEmitter<string>();
+  @Output() searchClicked: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private githubService: GithubService) { }
-
-  onClick(usernameInputValue: string) {
-    this.user = usernameInputValue;
-    this.talk.emit(usernameInputValue);
+  constructor(private githubService: GithubService) {
+    this.showError = false;
   }
 
+  onClick(usernameInputValue: string) {
+    if (!usernameInputValue) {
+      this.showError = true;
+      return;
+    }
+    this.showError = false;
+    this.searchClicked.emit(usernameInputValue);
+  }
 }
